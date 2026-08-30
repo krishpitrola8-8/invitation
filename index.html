@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ganpati Invitation — Parmar Family</title>
+<meta name="description" content="You are invited — Ganesh Chaturthi celebrations at the Parmar Family">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  /* ============================================================
+     DESIGN TOKENS — edit colors here to retheme the whole page
+     ============================================================ */
+  :root{
+    --maroon-deep:   #4A0F1C;
+    --maroon-mid:    #6E1B24;
+    --maroon-line:   #8A2A2F;
+    --marigold:      #E8811E;
+    --marigold-dark: #C8630F;
+    --gold:          #D9A441;
+    --gold-light:    #F3D18C;
+    --cream:         #FBF0DC;
+    --cream-dim:     #EFDFC0;
+    --vermillion:    #B23A2E;
+
+    --font-display: 'Yatra One', serif;
+    --font-body: 'Mukta', sans-serif;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 50% 0%, var(--maroon-mid) 0%, var(--maroon-deep) 55%, #33060F 100%);
+    color:var(--cream);
+    font-family:var(--font-body);
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* faint ambient mandala watermark, fixed behind content */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(217,164,65,0.07) 0, transparent 35%),
+      radial-gradient(circle at 85% 15%, rgba(232,129,30,0.06) 0, transparent 35%),
+      radial-gradient(circle at 50% 90%, rgba(217,164,65,0.08) 0, transparent 40%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* small static paisley motifs, tucked in the corners, very low opacity */
+  .bg-motif{
+    position:fixed; z-index:0; pointer-events:none; opacity:.09;
+  }
+  .bg-motif svg{ width:100%; height:100%; display:block; }
+  .bg-motif-tl{ top:6%; left:-30px; width:140px; height:140px; transform:rotate(-8deg); }
+  .bg-motif-br{ bottom:4%; right:-34px; width:160px; height:160px; transform:rotate(174deg); }
+  .bg-motif-tr{ top:34%; right:-30px; width:130px; height:130px; transform:scaleX(-1) rotate(-6deg); }
+  .bg-motif-bl{ bottom:26%; left:-32px; width:130px; height:130px; transform:scaleX(-1) rotate(176deg); }
+  .bg-motif-lotus{
+    top:58%; left:50%; transform:translateX(-50%);
+    width:180px; height:180px; opacity:.06;
+  }
+
+  .wrap{ position:relative; z-index:1; max-width:640px; margin:0 auto; padding:0 22px 60px; }
+
+  /* ============================================================
+     TORANA — hanging bunting strip, the page's signature element
+     ============================================================ */
+  .torana{
+    position:relative; width:100%;
+    padding:16px 18px 0;
+  }
+  .torana::before{
+    content:"";
+    position:absolute; top:16px; left:18px; right:18px; height:2px;
+    background:linear-gradient(90deg, transparent, var(--gold) 6%, var(--gold) 94%, transparent);
+  }
+  .torana-leaves{
+    position:relative;
+    display:flex; justify-content:space-between; align-items:flex-start;
+  }
+  .torana-leaves svg{
+    width:7.5%; min-width:16px; max-width:30px; height:auto; display:block;
+    transform-origin:top center;
+    animation:sway 4.5s ease-in-out infinite;
+  }
+  .torana-leaves svg:nth-child(odd){ animation-duration:5.2s; }
+  .torana-leaves svg:nth-child(3n){ animation-delay:.6s; }
+  .torana-leaves svg:nth-child(4n){ animation-delay:1.1s; }
+  @keyframes sway{
+    0%,100%{ transform:rotate(-3deg); }
+    50%{ transform:rotate(3deg); }
+  }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero{ text-align:center; padding-top:18px; }
+  .eyebrow{
+    font-family:var(--font-display);
+    color:var(--gold-light);
+    font-size:15px;
+    letter-spacing:.12em;
+    margin:0 0 6px;
+  }
+  .hero h1{
+    font-family:var(--font-display);
+    font-weight:400;
+    font-size:clamp(34px,9vw,52px);
+    line-height:1.05;
+    margin:0;
+    color:var(--marigold);
+    text-shadow:0 2px 0 rgba(0,0,0,.25);
+  }
+  .hero .sub{
+    margin:10px 0 0;
+    font-size:15px;
+    letter-spacing:.06em;
+    color:var(--cream-dim);
+    text-transform:uppercase;
+  }
+
+  .rule{
+    display:flex; align-items:center; gap:12px;
+    margin:22px auto; max-width:280px;
+  }
+  .rule::before,.rule::after{
+    content:""; flex:1; height:1px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .rule svg{ flex-shrink:0; width:20px; height:20px; }
+
+  .invite-line{
+    font-size:17px; line-height:1.6; color:var(--cream);
+    max-width:420px; margin:0 auto;
+  }
+  .host-name{
+    display:block; margin-top:8px;
+    font-family:var(--font-display);
+    font-size:clamp(26px,7vw,34px);
+    color:var(--gold-light);
+  }
+
+  /* ============================================================
+     MANDAP ARCH — frames the photo placeholder
+     ============================================================ */
+  .mandap{
+    position:relative;
+    max-width:280px;
+    margin:34px auto 10px;
+  }
+  .mandap-frame{ width:100%; height:auto; display:block; }
+  .photo-slot{
+    position:absolute;
+    left:11%; right:11%; top:9.5%; bottom:10%;
+    border-radius:100px 100px 6px 6px;
+    background:
+      repeating-linear-gradient(135deg, rgba(217,164,65,.10) 0 10px, rgba(217,164,65,.03) 10px 20px),
+      var(--maroon-mid);
+    border:1.5px solid rgba(217,164,65,.55);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .photo-slot.has-photo{ border-style:solid; }
+  .photo-slot:not(.has-photo){ border-style:dashed; }
+  .photo-slot img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    filter:saturate(1.04) contrast(1.03) brightness(0.97);
+  }
+  .photo-slot::after{
+    content:"";
+    position:absolute; inset:0;
+    border-radius:inherit;
+    background:radial-gradient(ellipse at center, transparent 55%, rgba(74,15,28,.65) 100%);
+    box-shadow:inset 0 0 26px rgba(74,15,28,.55);
+    pointer-events:none;
+  }
+  .photo-slot .placeholder-note{
+    text-align:center; padding:10px; color:var(--gold-light);
+    font-size:12px; line-height:1.5; letter-spacing:.03em;
+  }
+  .photo-slot .placeholder-note svg{ width:26px;height:26px; margin-bottom:6px; opacity:.85; }
+
+  .diya-flank{ position:absolute; bottom:-6px; width:30px; height:auto; }
+  .diya-left{ left:-14px; }
+  .diya-right{ right:-14px; transform:scaleX(-1); }
+  .flame{ animation:flicker 1.6s ease-in-out infinite; transform-origin:center bottom; }
+  @keyframes flicker{
+    0%,100%{ transform:scale(1,1) rotate(0deg); opacity:1; }
+    35%{ transform:scale(0.92,1.06) rotate(-2deg); opacity:.92; }
+    65%{ transform:scale(1.05,0.95) rotate(2deg); opacity:.97; }
+  }
+
+  /* ============================================================
+     DETAILS — ornamental rows, no boxes, matches the rest of the page
+     ============================================================ */
+  .details{ margin-top:44px; }
+
+  .detail-row{
+    display:flex; align-items:center; gap:18px;
+    padding:22px 2px;
+    opacity:0; transform:translateY(12px);
+    animation:rise .7s ease forwards;
+  }
+  .detail-row:nth-of-type(1){ animation-delay:.05s; }
+  .detail-row:nth-of-type(2){ animation-delay:.15s; }
+  .detail-row:nth-of-type(3){ animation-delay:.25s; }
+  @keyframes rise{ to{ opacity:1; transform:translateY(0); } }
+
+  .row-divider{
+    display:flex; align-items:center; justify-content:center; gap:10px;
+  }
+  .row-divider::before,.row-divider::after{
+    content:""; flex:1; height:1px; max-width:120px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity:.55;
+  }
+  .row-divider svg{ width:12px; height:12px; flex-shrink:0; opacity:.8; }
+
+  .detail-row .icon{
+    flex-shrink:0; width:38px; height:38px;
+    border:1.5px solid var(--gold);
+    border-radius:9px;
+    transform:rotate(45deg);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .detail-row .icon svg{ width:17px; height:17px; transform:rotate(-45deg); }
+
+  .detail-row .label{
+    font-family:var(--font-display);
+    font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--gold-light); margin:0 0 4px; font-weight:400;
+  }
+  .detail-row .value{
+    margin:0; font-size:19px; color:var(--cream);
+    font-family:var(--font-display); font-weight:400; line-height:1.4;
+  }
+  .detail-row .value em{
+    display:block; font-style:normal; font-family:var(--font-body);
+    font-size:13px; color:var(--cream-dim); margin-top:3px; letter-spacing:.02em;
+  }
+
+  .text-link{
+    display:inline-flex; align-items:center; gap:6px;
+    margin-top:8px;
+    color:var(--marigold);
+    font-family:var(--font-body); font-weight:600; font-size:13px;
+    letter-spacing:.03em;
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+    transition:border-color .2s ease, color .2s ease;
+  }
+  .text-link:hover{ color:var(--gold-light); border-color:var(--gold-light); }
+  .text-link svg{ width:13px; height:13px; transition:transform .2s ease; }
+  .text-link:hover svg{ transform:translateX(2px); }
+
+  /* ============================================================
+     MESSAGE BLOCK
+     ============================================================ */
+  .message{
+    margin-top:40px;
+    text-align:center;
+    padding:26px 18px;
+    position:relative;
+  }
+  .message .quote-mark{
+    font-family:var(--font-display); color:var(--marigold);
+    font-size:38px; line-height:1; display:block; margin-bottom:6px;
+  }
+  .message p{
+    margin:0; font-size:16px; line-height:1.75; color:var(--cream-dim);
+    max-width:420px; margin:0 auto;
+  }
+  .message .blessing{
+    display:block; margin-top:16px;
+    font-family:var(--font-display);
+    color:var(--gold-light); font-size:19px;
+  }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  footer{
+    margin-top:46px; text-align:center;
+  }
+  footer .om{ display:block; margin:0 auto 10px; font-family:var(--font-display); font-size:26px; line-height:1; color:var(--gold); opacity:.9; }
+  footer p{ margin:0; font-size:12px; letter-spacing:.08em; color:var(--cream-dim); text-transform:uppercase; }
+
+  @media (prefers-reduced-motion: reduce){
+    .torana-leaves svg,.flame,.detail-row{ animation:none !important; opacity:1 !important; transform:none !important; }
+  }
+
+  /* ============================================================
+     OPENING SCREEN — temple doors that part to reveal the invite
+     ============================================================ */
+  html.locked, body.locked{ overflow:hidden; height:100%; }
+
+  .cover{
+    position:fixed; inset:0; z-index:50;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .door{
+    position:absolute; top:0; bottom:0; width:50%;
+    background:
+      radial-gradient(circle at 50% 35%, var(--maroon-mid) 0%, var(--maroon-deep) 65%, #33060F 100%);
+    transition:transform 1.05s cubic-bezier(.76,0,.24,1);
+    box-shadow:inset 0 0 70px rgba(0,0,0,.45);
+  }
+  .door-left{ left:0; }
+  .door-right{ right:0; }
+  .door-left::before,.door-right::before{
+    content:""; position:absolute; top:0; bottom:0; width:1px;
+  }
+  .door-left::before{ right:0; background:linear-gradient(180deg, transparent 8%, var(--gold) 50%, transparent 92%); opacity:.6; }
+  .door-right::before{ left:0; background:linear-gradient(180deg, transparent 8%, var(--gold) 50%, transparent 92%); opacity:.6; }
+
+  .cover-inner{
+    position:relative; z-index:2; text-align:center; padding:0 26px;
+    transition:opacity .5s ease, transform .5s ease;
+  }
+  .cover-om{
+    display:block; margin:0 auto 16px;
+    font-family:var(--font-display);
+    font-size:44px; line-height:1; color:var(--gold);
+    animation:pulse-glow 2.6s ease-in-out infinite;
+  }
+  @keyframes pulse-glow{
+    0%,100%{ opacity:.65; transform:scale(1); }
+    50%{ opacity:1; transform:scale(1.08); }
+  }
+  .cover-eyebrow{
+    font-family:var(--font-display); color:var(--gold-light);
+    font-size:14px; letter-spacing:.14em; margin:0 0 12px;
+  }
+  .cover-title{
+    font-family:var(--font-display); font-weight:400;
+    font-size:clamp(30px,9vw,46px); color:var(--marigold); margin:0;
+    text-shadow:0 2px 0 rgba(0,0,0,.25);
+  }
+  .cover-sub{
+    font-family:var(--font-display); color:var(--gold-light);
+    font-size:20px; margin:10px 0 30px;
+  }
+  .open-btn{
+    font-family:var(--font-body); font-weight:700; letter-spacing:.06em;
+    text-transform:uppercase;
+    background:transparent; color:var(--gold-light);
+    border:1.5px solid var(--gold); border-radius:999px;
+    padding:13px 32px; font-size:13px; cursor:pointer;
+    transition:background .3s ease, color .3s ease, transform .2s ease, box-shadow .3s ease;
+  }
+  .open-btn:hover{
+    background:var(--marigold); color:#3A0C13; transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(232,129,30,.35);
+  }
+
+  .cover.opened .door-left{ transform:translateX(-100%); }
+  .cover.opened .door-right{ transform:translateX(100%); }
+  .cover.opened .cover-inner{ opacity:0; transform:scale(.94); pointer-events:none; }
+
+  @media (prefers-reduced-motion: reduce){
+    .door,.cover-inner{ transition:none !important; }
+    .cover-om{ animation:none !important; }
+  }
+
+  /* ============================================================
+     SOUND TOGGLE — appears once the invitation is opened
+     ============================================================ */
+  .sound-toggle{
+    position:fixed; bottom:18px; right:18px; z-index:40;
+    width:44px; height:44px; border-radius:50%;
+    background:rgba(74,15,28,.85);
+    border:1.5px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    opacity:0; pointer-events:none;
+    transition:opacity .5s ease, transform .2s ease;
+  }
+  .sound-toggle.visible{ opacity:1; pointer-events:auto; }
+  .sound-toggle:hover{ transform:scale(1.08); }
+  .sound-toggle svg{ width:18px; height:18px; }
+  .sound-toggle .icon-off{ display:none; }
+  .sound-toggle.muted .icon-on{ display:none; }
+  .sound-toggle.muted .icon-off{ display:block; }
+</style>
+</head>
+<body class="locked">
+
+<div class="bg-motif bg-motif-tl" aria-hidden="true">
+  <svg viewBox="0 0 100 100" fill="none">
+    <path d="M50,10 C20,10 10,35 20,55 C28,71 48,72 55,60 C60,52 55,44 47,45 C41,46 39,52 43,55"
+          stroke="#D9A441" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="43" cy="55" r="2.4" fill="#D9A441"/>
+    <path d="M50,10 C64,12 72,26 66,40" stroke="#D9A441" stroke-width="1.4" stroke-linecap="round"/>
+    <path d="M50,10 C58,18 60,28 55,36" stroke="#D9A441" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+  </svg>
+</div>
+<div class="bg-motif bg-motif-tr" aria-hidden="true">
+  <svg viewBox="0 0 100 100" fill="none">
+    <path d="M50,10 C20,10 10,35 20,55 C28,71 48,72 55,60 C60,52 55,44 47,45 C41,46 39,52 43,55"
+          stroke="#D9A441" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="43" cy="55" r="2.4" fill="#D9A441"/>
+    <path d="M50,10 C64,12 72,26 66,40" stroke="#D9A441" stroke-width="1.4" stroke-linecap="round"/>
+    <path d="M50,10 C58,18 60,28 55,36" stroke="#D9A441" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+  </svg>
+</div>
+<div class="bg-motif bg-motif-bl" aria-hidden="true">
+  <svg viewBox="0 0 100 100" fill="none">
+    <path d="M50,10 C20,10 10,35 20,55 C28,71 48,72 55,60 C60,52 55,44 47,45 C41,46 39,52 43,55"
+          stroke="#D9A441" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="43" cy="55" r="2.4" fill="#D9A441"/>
+    <path d="M50,10 C64,12 72,26 66,40" stroke="#D9A441" stroke-width="1.4" stroke-linecap="round"/>
+    <path d="M50,10 C58,18 60,28 55,36" stroke="#D9A441" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+  </svg>
+</div>
+<div class="bg-motif bg-motif-br" aria-hidden="true">
+  <svg viewBox="0 0 100 100" fill="none">
+    <path d="M50,10 C20,10 10,35 20,55 C28,71 48,72 55,60 C60,52 55,44 47,45 C41,46 39,52 43,55"
+          stroke="#D9A441" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="43" cy="55" r="2.4" fill="#D9A441"/>
+    <path d="M50,10 C64,12 72,26 66,40" stroke="#D9A441" stroke-width="1.4" stroke-linecap="round"/>
+    <path d="M50,10 C58,18 60,28 55,36" stroke="#D9A441" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+  </svg>
+</div>
+<div class="bg-motif bg-motif-lotus" aria-hidden="true">
+  <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#D9A441" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Stem -->
+      <path d="M60 112C60 82 60 58 60 42"/>
+      <!-- Center petal -->
+      <path d="M60 48C48 36 48 18 60 7C72 18 72 36 60 48Z"/>
+      <!-- Left upper petal -->
+      <path d="M58 50C42 46 30 32 29 16C45 18 56 31 60 45"/>
+      <!-- Right upper petal -->
+      <path d="M62 50C78 46 90 32 91 16C75 18 64 31 60 45"/>
+      <!-- Left outer petal -->
+      <path d="M57 55C40 57 24 47 18 32C35 30 50 39 60 51"/>
+      <!-- Right outer petal -->
+      <path d="M63 55C80 57 96 47 102 32C85 30 70 39 60 51"/>
+      <!-- Inner base petals -->
+      <path d="M60 57C50 52 43 48 39 40C50 40 57 46 60 54"/>
+      <path d="M60 57C70 52 77 48 81 40C70 40 63 46 60 54"/>
+      <!-- Leaves -->
+      <path d="M60 83C48 82 39 76 34 66C47 66 56 73 60 81"/>
+      <path d="M60 83C72 82 81 76 86 66C73 66 64 73 60 81"/>
+    </g>
+    <!-- Flower center -->
+    <circle cx="60" cy="50" r="2.8" fill="#D9A441"/>
+  </svg>
+</div>
+
+<!--
+  BACKGROUND MUSIC
+  Put your music file in the same folder as this index.html and update
+  the src below with its filename, e.g. src="music.mp3"
+-->
+<audio id="bgMusic" src="music.mp3" loop preload="auto"></audio>
+
+<button class="sound-toggle" id="soundToggle" type="button" aria-label="Toggle music">
+  <svg class="icon-on" viewBox="0 0 24 24" fill="none" stroke="#F3D18C" stroke-width="1.8"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M17 8a5 5 0 0 1 0 8"/></svg>
+  <svg class="icon-off" viewBox="0 0 24 24" fill="none" stroke="#F3D18C" stroke-width="1.8"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M17 15l5-5M22 15l-5-5"/></svg>
+</button>
+
+<div class="cover" id="cover">
+  <div class="door door-left" aria-hidden="true"></div>
+  <div class="door door-right" aria-hidden="true"></div>
+  <div class="cover-inner">
+    <span class="cover-om">ॐ</span>
+    <p class="cover-eyebrow">|| श्री गणेशाय नमः ||</p>
+    <h2 class="cover-title">You're Invited</h2>
+    <p class="cover-sub"><!-- HOST NAME --> Parmar Family</p>
+    <button class="open-btn" id="openBtn" type="button">Open Invitation</button>
+  </div>
+</div>
+
+<div class="torana" aria-hidden="true">
+  <div class="torana-leaves">
+    <svg viewBox="0 0 24 46"><path d="M12,0 Q0,18 12,38 Q24,18 12,0 Z" fill="#E8811E"/><circle cx="12" cy="38" r="3" fill="#D9A441"/></svg>
+    <svg viewBox="0 0 24 46"><path d="M12,0 Q0,20 12,42 Q24,20 12,0 Z" fill="#D9A441"/><circle cx="12" cy="42" r="3" fill="#E8811E"/></svg>
+    <svg viewBox="0 0 24 46"><path d="M12,0 Q0,16 12,34 Q24,16 12,0 Z" fill="#B23A2E"/><circle cx="12" cy="34" r="3" fill="#F3D18C"/></svg>
+    <svg viewBox="0 0 24 46"><path d="M12,0 Q0,20 12,42 Q24,20 12,0 Z" fill="#E8811E"/><circle cx="12" cy="42" r="3" fill="#D9A441"/></svg>
+    <svg viewBox="0 0 24 46"><path d="M12,0 Q0,22 12,46 Q24,22 12,0 Z" fill="#D9A441"/><circle cx="12" cy="46" r="3.5" fill="#B23A2E"/></svg>
+    <svg viewBox="0 0 24 46"><path d="M12,0 Q0,20 12,42 Q24,20 12,0 Z" fill="#E8811E"/><circle cx="12" cy="42" r="3" fill="#D9A441"/></svg>
+    <svg viewBox="0 0 24 46"><path d="M12,0 Q0,16 12,34 Q24,16 12,0 Z" fill="#B23A2E"/><circle cx="12" cy="34" r="3" fill="#F3D18C"/></svg>
+    <svg viewBox="0 0 24 46"><path d="M12,0 Q0,20 12,42 Q24,20 12,0 Z" fill="#D9A441"/><circle cx="12" cy="42" r="3" fill="#E8811E"/></svg>
+    <svg viewBox="0 0 24 46"><path d="M12,0 Q0,18 12,38 Q24,18 12,0 Z" fill="#E8811E"/><circle cx="12" cy="38" r="3" fill="#D9A441"/></svg>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section class="hero">
+    <p class="eyebrow">|| श्री गणेशाय नमः ||</p>
+    <h1>Ganesh Chaturthi</h1>
+    <p class="sub">An invitation to celebrate together</p>
+
+    <div class="rule" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="6" fill="#D9A441"/></svg>
+    </div>
+
+    <p class="invite-line">
+      With hearts full of joy, we welcome you to our home for the festival of Bappa —
+      <span class="host-name"><!-- HOST NAME --> Parmar Family</span>
+    </p>
+  </section>
+
+  <div class="mandap">
+    <svg class="mandap-frame" viewBox="0 0 280 340" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20,340 L20,140 C20,60 60,20 140,20 C220,20 260,60 260,140 L260,340"
+            fill="none" stroke="#D9A441" stroke-width="6"/>
+      <path d="M8,340 L8,150 C8,55 62,8 140,8 C218,8 272,55 272,150 L272,340"
+            fill="none" stroke="#E8811E" stroke-width="2.5" stroke-dasharray="1 10" stroke-linecap="round"/>
+      <!-- finial, connected to the arch with a short stem -->
+      <line x1="140" y1="8" x2="140" y2="20" stroke="#D9A441" stroke-width="3"/>
+      <circle cx="140" cy="8" r="7" fill="#E8811E"/>
+      <circle cx="140" cy="8" r="3" fill="#F3D18C"/>
+    </svg>
+
+    <div class="photo-slot">
+      <!-- To add your photo, delete the placeholder-note div below and
+           replace it with: <img src="your-photo.jpg" alt="Ganpati Bappa at our home">
+           Also add class="has-photo" to this photo-slot div for a clean solid border. -->
+      <img src="ganpati.jpg" alt="Ganpati Bappa at our home" class="has-photo">
+    </div>
+
+    <svg class="diya-flank diya-left" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4,26 Q20,40 36,26 Q30,30 20,30 Q10,30 4,26 Z" fill="#C8630F"/>
+      <g class="flame">
+        <path d="M20,8 Q26,16 20,24 Q14,16 20,8 Z" fill="#E8811E"/>
+        <path d="M20,13 Q23,17 20,22 Q17,17 20,13 Z" fill="#F3D18C"/>
+      </g>
+    </svg>
+    <svg class="diya-flank diya-right" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4,26 Q20,40 36,26 Q30,30 20,30 Q10,30 4,26 Z" fill="#C8630F"/>
+      <g class="flame">
+        <path d="M20,8 Q26,16 20,24 Q14,16 20,8 Z" fill="#E8811E"/>
+        <path d="M20,13 Q23,17 20,22 Q17,17 20,13 Z" fill="#F3D18C"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="details">
+
+    <div class="detail-row">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#D9A441" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+      </div>
+      <div>
+        <p class="label">Date</p>
+        <p class="value">Monday, 14th September<em>Ganesh Chaturthi</em></p>
+      </div>
+    </div>
+
+    <div class="row-divider" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" fill="#D9A441"/></svg>
+    </div>
+
+    <div class="detail-row">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#D9A441" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      </div>
+      <div>
+        <p class="label">Darshan Timing</p>
+        <p class="value">Open all day<em>Come by anytime that suits you</em></p>
+      </div>
+    </div>
+
+    <div class="row-divider" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" fill="#D9A441"/></svg>
+    </div>
+
+    <div class="detail-row">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#D9A441" stroke-width="1.6"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+      </div>
+      <div>
+        <p class="label">Venue</p>
+        <p class="value">A/3 Royal Shalibhadra, Pleasant Park, beside Ganpati Mandir, Mira Road</p>
+        <a class="text-link" href="https://maps.app.goo.gl/RJGexjtLrCzqd2n46" target="_blank" rel="noopener">
+          Get Directions
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="message">
+    <span class="quote-mark">"</span>
+    <p>
+      <!-- PERSONAL MESSAGE — edit freely -->
+      Your presence would mean the world to our family as we welcome Bappa home this year.
+      Come for the aarti, stay for the modaks, and bring nothing but yourselves.
+    </p>
+    <span class="blessing">Ganpati Bappa Morya!</span>
+  </div>
+
+  <footer>
+    <span class="om">ॐ</span>
+    <p>With love, the Parmar Family</p>
+  </footer>
+
+</div>
+
+<script>
+  document.documentElement.classList.add('locked');
+  var cover = document.getElementById('cover');
+  var openBtn = document.getElementById('openBtn');
+  var bgMusic = document.getElementById('bgMusic');
+  var soundToggle = document.getElementById('soundToggle');
+
+  openBtn.addEventListener('click', function(){
+    cover.classList.add('opened');
+    document.documentElement.classList.remove('locked');
+    document.body.classList.remove('locked');
+    setTimeout(function(){ cover.style.display = 'none'; }, 1100);
+
+    // Start music right on the open tap (a real user click), which
+    // satisfies browser autoplay rules.
+    bgMusic.volume = 0.6;
+    bgMusic.play().catch(function(){ /* file missing or blocked — ignored */ });
+    soundToggle.classList.add('visible');
+  });
+
+  soundToggle.addEventListener('click', function(){
+    if (bgMusic.paused){
+      bgMusic.play().catch(function(){});
+      soundToggle.classList.remove('muted');
+    } else {
+      bgMusic.pause();
+      soundToggle.classList.add('muted');
+    }
+  });
+</script>
+
+</body>
+</html>
